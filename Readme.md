@@ -115,10 +115,10 @@ Before running the attendance system, you need to generate face descriptors for 
 
 ### 2. Running the Attendance System
 
-1. **Run `attendance_system.py`**:
+1. **Run `main.py`**:
 
    ```sh
-   python attendance_system.py
+   python main.py
    ```
 
 2. The system will access the webcam and start recognizing faces. Detected faces will be marked as 'Present' in the attendance record.
@@ -139,7 +139,7 @@ Before running the attendance system, you need to generate face descriptors for 
 
 ## Functions
 
-### `attendance_system.py`
+### `main.py`
 
 - `mark_attendance(name)`: Marks a student as present in the attendance DataFrame.
 - `recognize_faces(frame)`: Detects and recognizes faces in a given video frame. Updates the attendance record if a known face is recognized.

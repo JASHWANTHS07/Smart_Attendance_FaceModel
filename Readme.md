@@ -57,8 +57,8 @@ project_folder/
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/smart-face-attendance.git
-   cd smart-face-attendance
+   git clone https://github.com/JASHWANTHS07/Smart_Attendance_FaceModel.git
+   cd Smart_Attendance_FaceModel
    ```
 
 2. **Install the required packages:**

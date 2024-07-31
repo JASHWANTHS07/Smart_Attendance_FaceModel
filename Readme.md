@@ -2,7 +2,11 @@
 
 ## Project Overview
 
-The Smart Face Attendance system leverages computer vision and facial recognition technology to automatically mark the attendance of students. It captures video frames from a webcam, detects faces, recognizes known faces, and updates an attendance record accordingly. The attendance record is saved in an organized manner, creating folders based on the year and month, and saving the attendance file with the current date.
+The Smart Face Attendance system leverages computer vision and facial recognition technology to automatically mark the attendance of students. It consists of three main scripts:
+
+1. `main.py`: Captures video frames from a webcam, detects faces, recognizes known faces, and updates an attendance record accordingly.
+2. `Generator.py`: Generates face descriptors from images and saves them for later use in face recognition.
+3. `Test.py`: A simple script to load and print a face descriptor for testing purposes.
 
 ## Requirements
 
@@ -43,13 +47,24 @@ project_folder/
 │   │   ├── descriptor1.npy
 │   │   ├── descriptor2.npy
 │
+├── single_image_folder/
+│   ├── person1/
+│   │   ├── image1.jpg
+│   │   ├── image2.png
+│   ├── person2/
+│   │   ├── image1.jpg
+│   │   ├── image2.png
+│
 ├── student_list.xlsx
-├── attendance_system.py
+├── main.py
+├── Generator.py
+├── Test.py
 └── README.md
 ```
 
 - `Dat_files/` contains the pre-trained models.
 - `face_descriptors/` contains numpy files for face descriptors of known persons.
+- `single_image_folder/` contains images of individuals to generate face descriptors.
 - `student_list.xlsx` is an Excel file containing the list of students.
 
 ## Setup and Installation
@@ -81,7 +96,26 @@ project_folder/
 
 ## Usage
 
-1. **Run the attendance system:**
+### 1. Generating Face Descriptors
+
+Before running the attendance system, you need to generate face descriptors for known individuals.
+
+1. **Place images in `single_image_folder/` subdirectories**:
+
+   - Create a folder for each person in `single_image_folder/`.
+   - Add images of the person in their respective folders.
+
+2. **Run `Generator.py`**:
+
+   ```sh
+   python Generator.py
+   ```
+
+   This script will read the images, detect faces, and save the face descriptors in the `face_descriptors/` folder.
+
+### 2. Running the Attendance System
+
+1. **Run `attendance_system.py`**:
 
    ```sh
    python attendance_system.py
@@ -93,19 +127,32 @@ project_folder/
 
    - The attendance record will be saved automatically in the `Attendance` directory, structured by year and month. The filename will be the current date in the format `dd-mm-yyyy_attendance.xlsx`.
 
+### 3. Testing Face Descriptors
+
+1. **Run `Test.py`**:
+
+   ```sh
+   python Test.py
+   ```
+
+2. This script will load and print a face descriptor for a specific person.
+
 ## Functions
 
-### `mark_attendance(name)`
+### `attendance_system.py`
 
-Marks a student as present in the attendance DataFrame.
+- `mark_attendance(name)`: Marks a student as present in the attendance DataFrame.
+- `recognize_faces(frame)`: Detects and recognizes faces in a given video frame. Updates the attendance record if a known face is recognized.
+- `save_attendance_to_file(attendance_df)`: Saves the attendance DataFrame to an Excel file in a structured directory format.
 
-### `recognize_faces(frame)`
+### `Generator.py`
 
-Detects and recognizes faces in a given video frame. Updates the attendance record if a known face is recognized.
+- `save_face_descriptors(input_folder, output_folder)`: Reads images from the input folder, detects faces, and saves face descriptors in the output folder.
+- `main()`: Main function to call `save_face_descriptors`.
 
-### `save_attendance_to_file(attendance_df)`
+### `Test.py`
 
-Saves the attendance DataFrame to an Excel file in a structured directory format.
+- Loads and prints a face descriptor from a file.
 
 ## Notes
 
@@ -122,5 +169,3 @@ Feel free to fork this repository and submit pull requests. For major changes, p
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ---
-
-This README file provides a comprehensive guide to setting up and running the Smart Face Attendance system. If you have any questions or encounter issues, please refer to the project's GitHub repository or open an issue for support.
